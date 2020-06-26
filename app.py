@@ -65,10 +65,11 @@ class MyApp(QMainWindow):
     def removeItems(self):
         listItems = self.list.selectedItems()
         if not listItems:
-            pass
-        for item in listItems:
-            self.list.takeItem(self.list.row(item))
-        self.progressBar.setValue(self.list.count())
+            QMessageBox.warning(self, "Warning", "Please select item !")
+        else:
+            for item in listItems:
+                self.list.takeItem(self.list.row(item))
+            self.progressBar.setValue(self.list.count())
 
     def clear(self):
         self.list.clear()
