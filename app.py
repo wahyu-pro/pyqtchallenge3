@@ -78,12 +78,15 @@ class MyApp(QMainWindow):
     def update(self):
         listItems = self.list.selectedItems()
         listdata = []
-        for i in listItems:
-            listdata.append(i.text())
-        self.inputUpdate, ok = QInputDialog.getText(self, "Edit", "Edit list item", text=listdata[0])
-        if self.inputUpdate != "" and ok == True:
-            for item in listItems:
-                self.list.item(self.list.row(item)).setText(self.inputUpdate)
+        if not listItems:
+            QMessageBox.warning(self, "Warning", "Please select item !")
+        else:
+            for i in listItems:
+                listdata.append(i.text())
+            self.inputUpdate, ok = QInputDialog.getText(self, "Edit", "Edit list item", text=listdata[0])
+            if self.inputUpdate != "" and ok == True:
+                for item in listItems:
+                    self.list.item(self.list.row(item)).setText(self.inputUpdate)
 
     def valueSlider(self):
         value = self.slider.value()
